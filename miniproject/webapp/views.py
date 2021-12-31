@@ -19,9 +19,24 @@ class Register(APIView):
         last_name = data['last_name']
         number = data['number']
         age = data['age']
-        print(first_name, last_name)
-        print("test")
-        return JsonResponse(first_name, safe=False)
+        email = data['email']
+        bmi = data['bmi']
+        smoke = data['smoke']
+        if int(age) > 45:
+            return JsonResponse("your age is more than what we expected", safe=False)
+        if not str(email).__contains__("@"):
+            return JsonResponse("your email seems invalid", safe=False)
+        new_user = User(first_name=first_name, last_name=last_name, number=number, age=age, email=email, bmi=bmi,
+                        smoke=smoke)
+        # new_user.first_name = first_name
+        # new_user.last_name = last_name
+        # new_user.number = number
+        # new_user.age = age
+        # new_user.email = email
+        # new_user.bmi = bmi
+        # new_user.smoke = smoke
+        new_user.save()
+        return JsonResponse("Registered Successfully", safe=False)
 
 
 class UserList(APIView):
