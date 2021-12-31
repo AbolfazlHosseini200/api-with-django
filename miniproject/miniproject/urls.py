@@ -21,4 +21,5 @@ from webapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', views.Register.as_view())
 ]
