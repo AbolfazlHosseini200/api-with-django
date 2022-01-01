@@ -26,7 +26,8 @@ class Register(APIView):
         password = data['password']
         password2 = data['password2']
         username = data['username']
-
+        if first_name == "" or last_name == "" or number == "" or password == "" or username == "":
+            return JsonResponse("please enter all needed information", safe=False)
         if db.username_is_in_db(username):
             return JsonResponse("This username has been taken before", safe=False)
         if not password2 == password:
